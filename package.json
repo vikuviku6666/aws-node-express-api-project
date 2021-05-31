@@ -1,18 +1,31 @@
 {
-  "name": "aws-node-express-api-project",
-  "version": "1.0.0",
-  "description": "",
-  "main": "handler.js",
-  "scripts": {
-    "start": "node handler.js",
-    "dev": "nodemon handler.js"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "morgan": "^1.10.0",
-    "pg": "^8.6.0",
-    "serverless-http": "^2.7.0"
-  }
+	"name": "aws-node-express-api-project",
+	"version": "1.0.0",
+	"description": "",
+	"main": "handler.js",
+	"scripts": {
+		"start": "node handler.js",
+		"dev": "nodemon handler.js",
+		"test": "cross-env NODE_ENV=test jest --testTimeout=10000"
+	},
+	"jest": {
+		"testEnvironment": "node",
+		"coveragePathIgnorePatterns": [
+			"/node_modules/"
+		]
+	},
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^10.0.0",
+		"express": "^4.17.1",
+		"morgan": "^1.10.0",
+		"pg": "^8.6.0",
+		"serverless-http": "^2.7.0"
+	},
+	"devDependencies": {
+		"@babel/preset-env": "^7.14.4",
+		"cross-env": "^7.0.3",
+		"jest": "^27.0.3",
+		"supertest": "^6.1.3"
+	}
 }

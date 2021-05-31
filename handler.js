@@ -11,54 +11,16 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-app.get('/available_schedules', async (req, res, next) => {
+app.get('/weekly_schedule', async (req, res, next) => {
 	try {
-		const workHours = await pool.query(`SELECT * FROM admin.available_schedules`);
-    return res.json(workHours.rows);
+		const workHours =
+			await pool.query(`select * from admin.get_schedule_week('33a21510-bb57-11eb-954e-1fd2bb5e2ba6','33a2be48-bb57-11eb-954e-cf32ff9040f0')
+limit 5`);
+		return res.json(workHours.rows);
 	} catch (err) {
 		console.error(err.message);
 	}
 });
-
-
-app.get('/admin.vendor_stores', async (req, res, next) => {
-  try {
-      const stores = await pool.query(`SELECT * FROM admin.vendor_stores`);
-      return  res.status(200).json(stores.rows);
-    } catch (err) {
-    console.error(err.message);
-  }
-});
-
-
-app.get('/service.areas', async (req, res) => {
-  try {
-    const areas = await pool.query(`SELECT * FROM service.areas`);
-    res.json(areas.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-app.get('/service.schedules_and_prices', async (req, res, next) => {
-  try {
-    const prices = await pool.query(`SELECT * FROM service.schedules_and_prices`);
-		return res.status(200).json(prices.rows);
-	} catch (err) {
-    console.error(err.message);
-	}
-});
-
-app.get('/admin.vendor_store_work_hours', async (req, res, next) => {
-  try {
-    const workHours = await pool.query(`SELECT * FROM admin.vendor_store_work_hours`);
-    return res.json(workHours.fields);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
